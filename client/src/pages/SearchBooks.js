@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import BookSearchCard from "../components/BookSearchCard";
 import API from "../utils/API";
 import Navbar from "../components/Nav";
 
@@ -54,8 +54,8 @@ class SearchBooks extends Component {
   render() {
     return (
       <div>
-
-        </div>
+        <BookSearchCard></BookSearchCard>
+      </div>
     );
   }
 }
