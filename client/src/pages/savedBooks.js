@@ -24,7 +24,6 @@ class SavedBooks extends Component {
         })
     }
 
-
   render() {
     return (
       <div>
