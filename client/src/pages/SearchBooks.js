@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import BookSearchCard from "../components/BookSearchCard";
+import BookResultsCard from "../components/BookResultsCard";
 import API from "../utils/API";
 import Navbar from "../components/Nav";
+import Axios from "axios";
 
 class SearchBooks extends Component {
   state = {
     books: [],
+    searchInput: '',
+    error: ''
   };
 
   // componentDidMount() {
@@ -21,12 +25,7 @@ class SearchBooks extends Component {
   // };
 
 
-  // todo: move to saved page when ready
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadBooks())
-  //     .catch(err => console.log(err));
-  // };
+
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -35,7 +34,25 @@ class SearchBooks extends Component {
     });
   };
 
-  //todo: booksearch function - figure out url from api, write function
+  bookSearch = event => {
+    event.preventDefault();
+    console.log("formsubmit")
+    let searchInput;
+    if(this.state.searchInput) {
+      searchInput = this.state.searchInput;
+    } else {
+      searchInput = "Handling Inputs for Dummies";
+    };
+    Axios.get("https://www.googleapis.com/books/v1/volumes?q=" + searchInput + "&printType=books&key=" + "")
+      .then(res => {
+        console.log(res)
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        this.setState({ books: res.data });
+      })
+      .catch(err => this.setState({ error: err.message }));
+  };
 
     //todo: (savebook function) modify to take event targets and add elements from google books api?
   // handleFormSubmit = event => {
@@ -54,7 +71,11 @@ class SearchBooks extends Component {
   render() {
     return (
       <div>
-        <BookSearchCard></BookSearchCard>
+        <BookSearchCard
+          bookSearch={this.bookSearch}
+          handleInputChange={this.handleInputChange}
+          />
+        <BookResultsCard />
       </div>
     );
   }
