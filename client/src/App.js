@@ -14,9 +14,8 @@ function App() {
         <Nav />
         <Jumbotron />
         <Switch>
-          {/* <Route exact path="/" component={SearchBooks} />
-          <Route exact path="/books" component={SearchBooks} /> */}
-          <Route path="/saved" component={SavedBooks} />
+          <Route exact path="/" component={SearchBooks} />
+          <Route exact path="/saved" component={SavedBooks} />
           <Route component={SearchBooks} />
         </Switch>
       </div>
