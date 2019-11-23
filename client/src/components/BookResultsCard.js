@@ -27,7 +27,7 @@ function BookResults(props) {
                                             data-bookid={book.id}
                                             >Save</button>
                                         )}
-                                        <a href={book.volumeInfo.infoLink} target="_blank">
+                                        <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer">
                                             <button type="button" className="btn btn-secondary float-right">View</button>
                                         </a>
                                         <p className="lead">{book.volumeInfo.title}</p>

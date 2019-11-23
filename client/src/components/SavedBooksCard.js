@@ -17,7 +17,7 @@ function SavedBooks(props) {
                                             onClick={props.removeBook} 
                                             data-id={book._id}
                                             >Delete</button>
-                                        <a href={book.link} target="_blank">
+                                        <a href={book.link} target="_blank" rel="noopener noreferrer">
                                             <button type="button" className="btn btn-secondary float-right">View</button>
                                         </a>
                                         <p className="lead">{book.title}</p>
