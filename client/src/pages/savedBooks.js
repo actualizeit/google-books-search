@@ -1,28 +1,40 @@
 import React, { Component } from "react";
-import BookSearchCard from "../components/BookSearchCard";
+import SavedBooksCard from "../components/SavedBooksCard";
 import API from "../utils/API";
-import Navbar from "../components/Nav";
   
 class SavedBooks extends Component {
     state = {
-      books: [],
-      searchInput: ''
+      savedBooks: [],
     };
   
-
+    componentDidMount() {
+      API.getBooks()
+        .then(res => this.setState({ savedBooks: res.data }))
+        .catch(err => console.log(err));
+    }
     
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadBooks())
-  //     .catch(err => console.log(err));
-  // };
+    removeBook = (event) => {
+      event.preventDefault();
+      console.log(event.target.getAttribute('data-id'));
+      API.deleteBook(event.target.getAttribute('data-id'))
+        .then(res => {
+          API.getBooks()
+            .then(res => this.setState({ bookArray: res.data }))
+            .catch(err => console.log(err));
+        })
+    }
 
 
   render() {
     return (
       <div>
-        <BookSearchCard></BookSearchCard>
+        <SavedBooksCard
+          savedBooks = {this.state.savedBooks}
+          removeBook = {this.removeBook}
+        />
       </div>
-    );
+    )
   }
 }
+
+export default SavedBooks;
