@@ -14,10 +14,10 @@ function App() {
         <Nav />
         <Jumbotron />
         <Switch>
-          <Route exact path="/" component={SearchBooks} />
-          <Route exact path="/books" component={SearchBooks} />
+          {/* <Route exact path="/" component={SearchBooks} />
+          <Route exact path="/books" component={SearchBooks} /> */}
           <Route exact path="/saved" component={SavedBooks} />
-          <Route component={NoMatch} />
+          <Route component={SearchBooks} />
         </Switch>
       </div>
     </Router>
