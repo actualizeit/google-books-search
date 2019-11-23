@@ -14,6 +14,19 @@ function BookResults(props) {
                                 {book.volumeInfo.authors &&
                                 <div className="card">
                                     <div className="card-body">
+                                    {props.savedBooks.includes(book.id) ? (
+                                            <button type="button" className="btn btn-warning float-right ml-2" disabled>Saved</button>
+                                        ) : ( 
+                                            <button type="button" className="btn btn-secondary float-right ml-2" 
+                                            onClick={props.saveBook} 
+                                            data-title={book.volumeInfo.title}
+                                            data-author={book.volumeInfo.authors[0]}
+                                            data-description={book.volumeInfo.description} 
+                                            data-image={book.volumeInfo.imageLinks.thumbnail}
+                                            data-link={book.volumeInfo.infoLink} 
+                                            data-bookid={book.id}
+                                            >Save</button>
+                                        )}
                                         <a href={book.volumeInfo.infoLink} target="_blank">
                                             <button type="button" className="btn btn-secondary float-right">View</button>
                                         </a>

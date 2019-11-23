@@ -9,6 +9,7 @@ class SearchBooks extends Component {
   state = {
     books: [],
     searchInput: '',
+    savedBooks: [],
     error: ''
   };
 
@@ -55,17 +56,23 @@ class SearchBooks extends Component {
   };
 
     // todo: (savebook function) modify to take event targets and add elements from google books api?
-  handleFormSubmit = event => {
+  saveBook = event => {
     event.preventDefault();
+    let bookID = event.target.getAttribute('data-bookid');
       API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
+        title: event.target.getAttribute('data-title'),
+        author: event.target.getAttribute('data-author'),
+        description: event.target.getAttribute('data-description'),
+        image: event.target.getAttribute('data-image'),
+        link: event.target.getAttribute('data-link'),
+        bookID: event.target.getAttribute('data-bookid')
       })
-        .then(res => this.loadBooks())
+        .then(res => {
+          var newBooks = this.state.savedBooks.concat(bookID);
+          this.setState({ savedBooks: newBooks })
+        })
         .catch(err => console.log(err));
     }
-  };
 
   render() {
     return (
@@ -77,11 +84,10 @@ class SearchBooks extends Component {
         <BookResultsCard 
           books = {this.state.books}
           saveBook = {this.saveBook}
-          savedBookids = {this.state.savedBooks}
+          savedBooks = {this.state.savedBooks}
         />
       </div>
     );
-  }
-}
-
+  };
+};
 export default SearchBooks;
