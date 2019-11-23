@@ -12,19 +12,18 @@ class SearchBooks extends Component {
     error: ''
   };
 
-  // componentDidMount() {
-  //   this.loadBooks();
-  // }
+  componentDidMount() {
+    this.loadBooks();
+  }
 
-  // loadBooks = () => {
-  //   API.getBooks()
-  //     .then(res =>
-  //       this.setState({ books: res.data })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-
+  loadBooks = () => {
+    API.getBooks()
+      .then(res =>
+        this.setState({ books: res.data }),
+        console.log(this.state.books)
+      )
+      .catch(err => console.log(err));
+  };
 
 
   handleInputChange = event => {
@@ -45,28 +44,28 @@ class SearchBooks extends Component {
     };
     Axios.get("https://www.googleapis.com/books/v1/volumes?q=" + searchInput + "&printType=books&key=" + "")
       .then(res => {
-        console.log(res)
+
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
         this.setState({ books: res.data });
+        console.log(this.state.books)
       })
       .catch(err => this.setState({ error: err.message }));
   };
 
-    //todo: (savebook function) modify to take event targets and add elements from google books api?
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   if (this.state.title && this.state.author) {
-  //     API.saveBook({
-  //       title: this.state.title,
-  //       author: this.state.author,
-  //       synopsis: this.state.synopsis
-  //     })
-  //       .then(res => this.loadBooks())
-  //       .catch(err => console.log(err));
-  //   }
-  // };
+    // todo: (savebook function) modify to take event targets and add elements from google books api?
+  handleFormSubmit = event => {
+    event.preventDefault();
+      API.saveBook({
+        title: this.state.title,
+        author: this.state.author,
+        synopsis: this.state.synopsis
+      })
+        .then(res => this.loadBooks())
+        .catch(err => console.log(err));
+    }
+  };
 
   render() {
     return (
@@ -75,7 +74,11 @@ class SearchBooks extends Component {
           bookSearch={this.bookSearch}
           handleInputChange={this.handleInputChange}
           />
-        <BookResultsCard />
+        <BookResultsCard 
+          books = {this.state.books}
+          saveBook = {this.saveBook}
+          savedBookids = {this.state.savedBooks}
+        />
       </div>
     );
   }
