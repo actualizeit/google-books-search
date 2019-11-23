@@ -14,7 +14,7 @@ function SavedBooks(props) {
                                 <div className="card">
                                     <div className="card-body">
                                             <button type="button" className="btn btn-secondary float-right ml-2" 
-                                            onClick={props.deleteBook} 
+                                            onClick={props.removeBook} 
                                             data-id={book._id}
                                             >Delete</button>
                                         <a href={book.link} target="_blank">

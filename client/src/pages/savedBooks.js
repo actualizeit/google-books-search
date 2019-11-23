@@ -19,7 +19,7 @@ class SavedBooks extends Component {
       API.deleteBook(event.target.getAttribute('data-id'))
         .then(res => {
           API.getBooks()
-            .then(res => this.setState({ bookArray: res.data }))
+            .then(res => this.setState({ savedBooks: res.data }))
             .catch(err => console.log(err));
         })
     }
