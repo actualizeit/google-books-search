@@ -2,6 +2,6 @@
   "root": "build/",
   "clean_urls": false,
   "routes": {
-    "https://google-books-search-1.herokuapp.com/**": "index.html"
+    "/**": "index.html"
   }
 }
