@@ -10,7 +10,7 @@ Type a search term into the main page and results will display below it. Click �
 
 ### Prerequisites
 
-It’s on Heroku so you good.
+[It’s on Heroku](https://google-books-search-1.herokuapp.com/) so you good.
 
 ### Installing
 
